@@ -1,10 +1,6 @@
-FROM node
+FROM nginx:latest
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# 将项目根目录下dist文件夹下的所有文件复制到镜像中 /usr/share/nginx/html/ 目录下
+COPY front/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-COPY package*.json ./
-
-EXPOSE 3000
-
-CMD npm install --registry https://registry.npm.taobao.org && node ./dist/main.js 
